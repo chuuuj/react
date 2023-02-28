@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>어떤 조리법</title>
+    <style>
+
+
+    </style>
+</head>
+<body>
+      <div id="root1"></div>
+      <div id="root2"></div>
+      <div id="root3"></div>
+      <div id="root4"></div>
+      <div id="root5"></div>
+      <div id="root6"></div>
+
+    <script src="js/vendor/react/react@16.14.dev.js"></script>
+    <script src="js/vendor/react/react-dom@16.14.dev.js"></script>
+    <script src="js/vendor/babel.min.js"></script>
+
+    <script type="text/babel">
+
+        const Food1 = () => {
+            return (<section id="baked-salmon">
+                <h1>구운 연어</h1>
+                <ul className="ingredients">
+                    <li>연어 900그램</li>
+                    <li>신선한 로즈마리 5 가지</li>
+                    <li>올리브 오일 2 테이블스푼</li>
+                    <li>작은 레몬 2조각</li>
+                    <li>코셔 소금 1티스푼</li>
+                    <li>다진 마늘 4쪽</li>
+                </ul>
+                <section className="instructions">
+                    <h2>조리 절차</h2>
+                    <p>오븐을 190도로 예열한다.</p>
+                    <p>알루미늄 포일에 올리브 오일을 가볍게 두른다</p>
+                    <p>로즈마리, 슬라이스한 레몬, 다진 마늘을 연어 위에 얹는다.</p>
+                    <p>완전히 익을 때까지 15~20분간 굽는다.</p>
+                    <p>오븐에서 그릇을 꺼낸다</p>
+                </section>
+            </section>)
+        };
+
+        ReactDOM.render(Food1(),document.querySelector('#root5'));
+
+        const ingredients = () => {
+            return React.createElement('section',{id : 'baked-salmon'}, React.createElement('h1', null, '구운 연어'),
+                React.createElement('ul', {className : 'ingredients'},
+                React.createElement('li',null,'연어 900그램'),
+                React.createElement('li',null,'신선한 로즈마리 5 가지'),
+                React.createElement('li',null,'올리브 오일 2 테이블스푼'),
+                React.createElement('li',null,'작은 레몬 2조각'),
+                React.createElement('li',null,'코셔 소금 1티스푼'),
+                React.createElement('li',null,'다진 마늘 4쪽')))
+        };
+
+        const instructions = () => {
+            return React.createElement('section',{className : 'instructions'}, React.createElement('h2', null, '조리 과정'),
+                React.createElement('p', null, '오븐을 190도로 예열한다.'),
+                React.createElement('p', null, '알루미늄 포일에 올리브 오일을 가볍게 두른다'),
+                React.createElement('p', null, '로즈마리, 슬라이스한 레몬, 다진 마늘을 연어 위에 얹는다.'),
+                React.createElement('p', null, '완전히 익을 때까지 15~20분간 굽는다.'),
+                React.createElement('p', null, '오븐에서 그릇을 꺼낸다'));
+        }
+
+        ReactDOM.render(ingredients(),document.querySelector('#root1'));
+        ReactDOM.render(instructions(),document.querySelector('#root2'));
+
+        const items = ['연어 900그램','신선한 로즈마리 5 가지','올리브 오일 2 테이블스푼','작은 레몬 2조각','코셔 소금 1티스푼','다진 마늘 4쪽'];
+        const instructs =['오븐을 190도로 예열한다.','알루미늄 포일에 올리브 오일을 가볍게 두른다','로즈마리, 슬라이스한 레몬, 다진 마늘을 연어 위에 얹는다.','완전히 익을 때까지 15~20분간 굽는다.','오븐에서 그릇을 꺼낸다'];
+
+        const ingredientsList = () => {
+            return React.createElement('ul', {className : 'ingredients'}, items.map((ingredient, val) => React.createElement('li',{key : val},ingredient)))
+        }
+
+        const instructsList = () => {
+            return React.createElement('section', {className : 'instructions'}, instructs.map((instructions, val) => React.createElement('p', {key : val},instructions)))
+        }
+        ReactDOM.render(ingredientsList(),document.querySelector('#root3'));
+        ReactDOM.render(instructsList(),document.querySelector('#root4'));
+
+        const menu = '구운연어';
+
+        const Food2 = (props) => {
+            let itemsJSX = props.item.map(val => <li key={val}>{val}</li>);
+            let instructsJSX = props.instruct.map(val => <p key={val}>{val}</p>);
+
+            return (<section id="baked-salmon">
+                <h1>{props.menu}</h1>
+                <ul className="ingredients">
+                    {itemsJSX}
+                </ul>
+                <section className="instructions">
+                    <h2>조리 절차</h2>
+                    {instructsJSX}
+                </section>
+            </section>)
+        };
+
+        ReactDOM.render(<Food2 menu='구운 연어' item={items} instruct={instructs} />,document.querySelector('#root6'));
+
+
+    </script>
+</body>
+</html>
